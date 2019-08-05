@@ -11,7 +11,7 @@ const compare = (obj1, obj2) => {
 };
 
 class Controller extends ENIP {
-    constructor() {
+    constructor(opts = {}) {
         super();
 
         this.state = {
@@ -37,9 +37,9 @@ class Controller extends ENIP {
         };
 
         this.workers = {
-            read: new Queue(compare),
-            write: new Queue(compare),
-            group: new Queue(compare)
+            read: new Queue(compare, opts.queue_max_size),
+            write: new Queue(compare, opts.queue_max_size),
+            group: new Queue(compare, opts.queue_max_size)
         };
     }
 
